@@ -11,8 +11,8 @@ public class Movement : MonoBehaviour {
         mRigidBody = GetComponent<Rigidbody2D>();
     }
 
-    public void move(float moveX) {
-        var targetVelocity = new Vector2(moveX * moveSpeed, 0f);
+    public void move(float moveX, float moveY) {
+        var targetVelocity = new Vector2(moveX, moveY).normalized * moveSpeed;
         mRigidBody.velocity = Vector2.SmoothDamp(mRigidBody.velocity, targetVelocity, ref velocity, 0f);
         if (moveX < 0f && faceLeft) {
             flip();

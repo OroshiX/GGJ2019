@@ -23,6 +23,7 @@ ExportedObj/
 *.svd
 *.pdb
 *.opendb
+UnityEditorConsuloPlugin2017.2.dll*
 
 # Unity3D generated meta files
 *.pidb.meta

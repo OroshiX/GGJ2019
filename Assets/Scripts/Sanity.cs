@@ -28,7 +28,7 @@ public class Sanity : MonoBehaviour {
             sanity -= amount;
             updateDisplay();
         } else {
-            Debug.LogError("Amout should be >0: " + amount);
+            Debug.LogError("Amount should be >0: " + amount);
         }
     }
 
@@ -37,7 +37,7 @@ public class Sanity : MonoBehaviour {
             sanity += amount;
             updateDisplay();
         } else {
-            Debug.LogError("Amout should be >0: " + amount);
+            Debug.LogError("Amount should be >0: " + amount);
         }
     }
 }

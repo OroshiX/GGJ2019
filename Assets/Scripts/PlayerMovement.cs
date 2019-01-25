@@ -4,6 +4,7 @@ public class PlayerMovement : MonoBehaviour {
     private Movement movement;
 
     private float horizontalMove = 0f;
+
     // Start is called before the first frame update
     void Start() {
         movement = GetComponent<Movement>();
@@ -15,6 +16,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        movement.move(horizontalMove * Time.fixedDeltaTime);;
+        movement.move(horizontalMove * Time.fixedDeltaTime, 0f);
     }
 }
