@@ -11,16 +11,16 @@ public class InteractableObject : MonoBehaviour {
 
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.CompareTag(Tags.PLAYER)) {
-            if (Input.GetKeyDown(KeyMapping.mainAction)) {
-                // TODO open/close/take/release
-
-            } else if (Input.GetKeyDown(KeyMapping.secondaryAction)) {
-                // TODO launch, ...
-            }
-        }
-    }
+    //    void OnTriggerEnter2D(Collider2D other) {
+    //        if (other.gameObject.CompareTag(Tags.PLAYER)) {
+    //            if (Input.GetKeyDown(KeyMapping.mainAction)) {
+    //                // TODO open/close/take/release
+    //
+    //            } else if (Input.GetKeyDown(KeyMapping.secondaryAction)) {
+    //                // TODO launch, ...
+    //            }
+    //        }
+    //    }
 
     // Update is called once per frame
     void Update() {

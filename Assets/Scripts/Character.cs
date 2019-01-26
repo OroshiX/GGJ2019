@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
     [SerializeField]
-    private InteractableObject inHand;
+    private Takeable inHand;
     private InteractableObject inCollision;
     private ReleaseArea releaseArea;
 
@@ -15,24 +15,32 @@ public class Character : MonoBehaviour {
         }
     }
 
-
-    void OnCollisionEnter2D(Collision2D collisionInfo) {
-        if (collisionInfo.gameObject.CompareTag(Tags.OBJECT)) {
-            inCollision = collisionInfo.gameObject.GetComponent<InteractableObject>();
-        } else if (collisionInfo.gameObject.CompareTag(Tags.AREA_RELEASE)) {
-            releaseArea = collisionInfo.gameObject.GetComponent<ReleaseArea>();
+    void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("We are colliding with " + other.name);
+        if (other.gameObject.CompareTag(Tags.OBJECT)) {
+            inCollision = other.gameObject.GetComponent<InteractableObject>();
+        } else if (other.gameObject.CompareTag(Tags.AREA_RELEASE)) {
+            releaseArea = other.gameObject.GetComponent<ReleaseArea>();
         }
     }
 
-    void OnCollisionExit2D(Collision2D collisionInfo) {
-        inCollision = null;
+    void OnTriggerExit2D(Collider2D other) {
+        Debug.Log("We are EXITING collision with " + other.name);
+        if (other.gameObject.CompareTag(Tags.OBJECT)) {
+            inCollision = null;
+        } else if (other.gameObject.CompareTag(Tags.AREA_RELEASE)) {
+            releaseArea = null;
+        }
     }
 
     void Update() {
         if (Input.GetKeyDown(KeyMapping.mainAction)) {
+            Debug.Log("Pressed main action!");
             if (inHand) {
+                Debug.Log("In hand, so release");
                 release();
             } else if (inCollision) {
+                Debug.Log("In collision");
                 if ((bool) inCollision.GetComponent<Takeable>()) {
                     take(inCollision.GetComponent<Takeable>());
                 } else if (inCollision.GetComponent<Openable>()) {
@@ -44,6 +52,8 @@ public class Character : MonoBehaviour {
 
     private void take(Takeable theObject) {
         inHand = theObject;
+        inHand.transform.parent = gameObject.transform;
+        inHand.transform.localPosition = new Vector2();
     }
 
     private void openOrClose(Openable openable) {

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class Openable : InteractableObject {
     private bool open;
 

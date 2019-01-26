@@ -1,6 +1,11 @@
+using UnityEngine;
+
 public class Takeable : InteractableObject {
+    [SerializeField]
+    private TypeObject type;
 
-    public override void launch() {
-
+    public TypeObject getTheType() {
+        return type;
     }
+
 }
