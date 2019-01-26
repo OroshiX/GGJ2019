@@ -4,7 +4,10 @@ using UnityEngine.UI;
 public class Sanity : MonoBehaviour {
     [SerializeField]
     [RangeAttribute(0f, 100f)]
-    private float sanity;
+    private float sanity = 50f;
+
+    private float basicLosePerSecond = 2.5f / 60f; // 20min pour perdre depuis 50%
+    private float baseMultiplier = 1f;
 
     [SerializeField]
     private Slider slider;
@@ -16,7 +19,15 @@ public class Sanity : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        sanity -= basicLosePerSecond * baseMultiplier * Time.deltaTime;
+    }
 
+    public void goDark() {
+        baseMultiplier = 2f;
+    }
+
+    public void goLight() {
+        baseMultiplier = 1f;
     }
 
     private void updateDisplay() {

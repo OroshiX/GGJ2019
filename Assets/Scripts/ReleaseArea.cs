@@ -8,9 +8,14 @@ public class ReleaseArea : MonoBehaviour {
     [SerializeField]
     private Vector2 positionReleasedObject;
 
+    [SerializeField]
+    private Sprite renderedArea;
+
     public void put(Takeable takeable) {
-        if (!takeable && takeable.getTheType() == typeObjectToGoHere) {
+        Debug.Log("Putting takeable " + takeable.name + " in release area");
+        if (takeable && takeable.getTheType() == typeObjectToGoHere) {
             takeable.transform.parent = null;
+            takeable.GetComponent<SpriteRenderer>().sprite = renderedArea;
             this.takeable = takeable;
             takeable.transform.position = positionReleasedObject;
         }
