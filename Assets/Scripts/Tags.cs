@@ -3,4 +3,5 @@ public class Tags {
     public const string OBJECT = "Object";
 
     public const string AREA_RELEASE = "AreaRelease";
+    public const string ROOM = "Room";
 }

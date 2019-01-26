@@ -8,6 +8,7 @@ TagManager:
   - Cat
   - Object
   - AreaRelease
+  - Room
   layers:
   - Default
   - TransparentFX
