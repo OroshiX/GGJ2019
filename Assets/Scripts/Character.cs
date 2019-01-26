@@ -5,6 +5,7 @@ public class Character : MonoBehaviour {
     private Takeable inHand;
     private InteractableObject inCollision;
     private ReleaseArea releaseArea;
+    private ChangeRoom whichRoom;
 
     public void release() {
         if (releaseArea) {
@@ -19,8 +20,12 @@ public class Character : MonoBehaviour {
         Debug.Log("We are colliding with " + other.name);
         if (other.gameObject.CompareTag(Tags.OBJECT)) {
             inCollision = other.gameObject.GetComponent<InteractableObject>();
-        } else if (other.gameObject.CompareTag(Tags.AREA_RELEASE)) {
+        }
+        if (other.gameObject.CompareTag(Tags.AREA_RELEASE)) {
             releaseArea = other.gameObject.GetComponent<ReleaseArea>();
+        }
+        if (other.gameObject.CompareTag(Tags.ROOM)) {
+            whichRoom = other.gameObject.GetComponent<ChangeRoom>();
         }
     }
 
@@ -58,7 +63,9 @@ public class Character : MonoBehaviour {
             }
         } else if (Input.GetKeyDown(KeyMapping.changeWorld)) {
             // TODO check can change world
+            // Check which room we are in
 
+            // Check if in that
         }
     }
 
