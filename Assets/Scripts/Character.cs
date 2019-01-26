@@ -47,6 +47,18 @@ public class Character : MonoBehaviour {
                     openOrClose(inCollision.GetComponent<Openable>());
                 }
             }
+        } else if (Input.GetKeyDown(KeyMapping.secondaryAction)) {
+            // TODO which actions possible?
+            if (inHand) {
+                // Launch?
+            } else if (inCollision) {
+                if (inCollision.GetComponent<Pushable>()) {
+                    push(inCollision.GetComponent<Pushable>());
+                }
+            }
+        } else if (Input.GetKeyDown(KeyMapping.changeWorld)) {
+            // TODO check can change world
+
         }
     }
 
@@ -59,6 +71,9 @@ public class Character : MonoBehaviour {
     private void openOrClose(Openable openable) {
         openable.openOrClose();
     }
-    //    public void
+
+    private void push(Pushable pushable) {
+        // TODO
+    }
 
 }

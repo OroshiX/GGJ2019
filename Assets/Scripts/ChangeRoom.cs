@@ -2,6 +2,7 @@
 using UnityEngine;
 
 public class ChangeRoom : MonoBehaviour {
+    [SerializeField]
     private bool changePossible = true;
     [SerializeField]
     private Direction direction;
