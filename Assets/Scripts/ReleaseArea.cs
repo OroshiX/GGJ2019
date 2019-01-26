@@ -6,7 +6,7 @@ public class ReleaseArea : MonoBehaviour {
     [SerializeField]
     private TypeObject typeObjectToGoHere;
     [SerializeField]
-    private Vector2 positionReleasedObject;
+    private Vector3 positionReleasedObject;
 
     [SerializeField]
     private Sprite renderedArea;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class ChangeRoom : MonoBehaviour {
     private bool changePossible = true;
@@ -8,8 +9,17 @@ public class ChangeRoom : MonoBehaviour {
     private float deltaPosChangeRoom = 5f;
     [SerializeField]
     private GameObject character;
+    private Camera camera;
+
+    public float transitionDuration = .5f;
+
+    public Transform nextRoom;
+
+    public float heightRoom;
     // Start is called before the first frame update
     void Start() {
+        camera = FindObjectOfType<Camera>();
+        heightRoom = transform.parent.GetComponent<SpriteRenderer>().size.y;
 
     }
 
@@ -28,23 +38,60 @@ public class ChangeRoom : MonoBehaviour {
 
     }
 
-    private void changeRoom(Direction direction) {
-        // TODO lerp camera
+    IEnumerator transitionCamera() {
+        float t = 0f;
+        var startingPos = camera.transform.position;
+        var endPos = nextRoom.position;
+        endPos.z = -10f;
+        while (t < 1.0f) {
+            t += Time.deltaTime * Time.timeScale / transitionDuration;
+            camera.transform.position = Vector3.Lerp(startingPos, endPos, t);
+            yield return 0;
+        }
+    }
 
-        Vector2 positionCharacterEnd = character.transform.position;
+    IEnumerator transitionCharacter() {
+        float t = 0f;
+        var startingPos = character.transform.position;
+
+        var endPos = new Vector2(startingPos.x, startingPos.y);
         switch (direction) {
             case Direction.LEFT:
-                positionCharacterEnd.x -= deltaPosChangeRoom;
-                break;
-            case Direction.BOTTOM:
+                endPos.x -= deltaPosChangeRoom;
                 break;
             case Direction.RIGHT:
-                positionCharacterEnd.x += deltaPosChangeRoom;
+                endPos.x += deltaPosChangeRoom;
                 break;
             case Direction.TOP:
+                endPos.y += heightRoom;
+                break;
+            case Direction.BOTTOM:
+                endPos.y -= heightRoom;
                 break;
         }
+        while (t < 1.0f) {
+            t += Time.deltaTime * Time.timeScale / transitionDuration;
+            character.transform.position = Vector3.Lerp(startingPos, endPos, t);
+            yield return 0;
+        }
+    }
 
-        character.transform.position = positionCharacterEnd;
+    private void enable() {
+        foreach (var change in toReenable) {
+            change.gameObject.SetActive(true);
+        }
+    }
+
+    private ChangeRoom[] toReenable;
+
+    private void changeRoom(Direction direction) {
+        Debug.Log("Changing room");
+        toReenable = nextRoom.transform.GetComponentsInChildren<ChangeRoom>();
+        foreach (var change in toReenable) {
+            change.gameObject.SetActive(false);
+        }
+        StartCoroutine(transitionCamera());
+        StartCoroutine(transitionCharacter());
+        Invoke("enable", transitionDuration);
     }
 }

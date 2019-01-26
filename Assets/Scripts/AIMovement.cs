@@ -1,5 +1,4 @@
-﻿using Unity.Collections.LowLevel.Unsafe;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AIMovement : MonoBehaviour {
 

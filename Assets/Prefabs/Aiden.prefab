@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 6709671426234468427}
   - component: {fileID: 6709671426234468420}
   - component: {fileID: 6709671426234468421}
+  - component: {fileID: 380503068894209500}
   m_Layer: 0
-  m_Name: Character
-  m_TagString: Untagged
+  m_Name: Aiden
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6709671426234468430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.25, z: 0}
+  m_LocalPosition: {x: 40, y: -3.25, z: 0}
   m_LocalScale: {x: 4.3085, y: 4.3085, z: 4.3085}
   m_Children:
   - {fileID: 6709671426612849004}
@@ -114,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c577a00e150b7185b39dd9b323077be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sanity: 100
+  sanity: 50
   slider: {fileID: 0}
 --- !u!61 &6709671426234468421
 BoxCollider2D:
@@ -142,6 +143,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.29327026, y: 0.35574377}
   m_EdgeRadius: 0
+--- !u!114 &380503068894209500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6709671426234468430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9cd9827c4c89524eac28d66e4aa2488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inHand: {fileID: 0}
 --- !u!1 &6709671426612849011
 GameObject:
   m_ObjectHideFlags: 0
