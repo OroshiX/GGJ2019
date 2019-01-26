@@ -2,6 +2,7 @@
 
 public class AIMovement : MonoBehaviour {
 
+    private Movement movement;
     private bool pausedMovement = false;
 
     [SerializeField]
@@ -9,15 +10,18 @@ public class AIMovement : MonoBehaviour {
 
     private Vector2 forwardDirection;
 
-    [SerializeField]
-    private float maxTimeTillChangeDir = 5f;
-    // Start is called before the first frame update
     void Start() {
-
+        movement = GetComponent<Movement>();
+        InvokeRepeating("AIMoving", 3.0f, 3.0f);
     }
 
-    // Update is called once per frame
-    void Update() {
-
+    void AIMoving() {
+        float random = Random.value;
+        if (random < 0.3f)
+            movement.move(60f, 0f);
+        else if (random < 0.6f)
+            movement.move(-60f, 0f);
+        else
+            movement.move(0f, 0f);
     }
 }
