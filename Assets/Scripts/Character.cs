@@ -64,7 +64,9 @@ public class Character : MonoBehaviour {
         } else if (Input.GetKeyDown(KeyMapping.changeWorld)) {
             // TODO check can change world
             // Check which room we are in
-
+            if (whichRoom) {
+                whichRoom.GetComponent<Opposite>();
+            }
             // Check if in that
         }
     }

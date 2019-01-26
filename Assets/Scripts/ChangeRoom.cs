@@ -1,16 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class ChangeRoom : MonoBehaviour {
-    [SerializeField]
-    private bool changePossible = true;
+public class ChangeRoom : Passage {
+
     [SerializeField]
     private Direction direction;
     [SerializeField]
     private float deltaPosChangeRoom = 5f;
     [SerializeField]
     private GameObject character;
-    private Camera camera;
+    private Camera mCamera;
 
     public float transitionDuration = .5f;
 
@@ -19,7 +18,7 @@ public class ChangeRoom : MonoBehaviour {
     public float heightRoom;
     // Start is called before the first frame update
     void Start() {
-        camera = FindObjectOfType<Camera>();
+        mCamera = FindObjectOfType<Camera>();
         heightRoom = transform.parent.GetComponent<SpriteRenderer>().size.y;
 
     }
@@ -27,26 +26,21 @@ public class ChangeRoom : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D collisionInfo) {
         Debug.Log("Collision");
         if (collisionInfo.gameObject.CompareTag(Tags.PLAYER)) {
-            if (changePossible) {
-                // TODO change room
+            if (canGo) {
                 changeRoom(direction);
             }
         }
     }
 
-    // Update is called once per frame
-    void Update() {
-
-    }
 
     IEnumerator transitionCamera() {
         float t = 0f;
-        var startingPos = camera.transform.position;
+        var startingPos = mCamera.transform.position;
         var endPos = nextRoom.position;
         endPos.z = -10f;
         while (t < 1.0f) {
             t += Time.deltaTime * Time.timeScale / transitionDuration;
-            camera.transform.position = Vector3.Lerp(startingPos, endPos, t);
+            mCamera.transform.position = Vector3.Lerp(startingPos, endPos, t);
             yield return 0;
         }
     }

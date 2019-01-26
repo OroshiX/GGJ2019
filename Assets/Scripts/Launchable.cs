@@ -5,7 +5,7 @@ public class Launchable : InteractableObject {
 
     private float speed = 3f;
 
-    new void Start() {
+    void Start() {
         animatorController = GetComponent<AnimatorController>();
     }
 

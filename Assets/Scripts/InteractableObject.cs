@@ -5,12 +5,6 @@ public class InteractableObject : MonoBehaviour {
     [SerializeField]
     private float sanityEffect = 0f;
 
-
-    // Start is called before the first frame update
-    void Start() {
-
-    }
-
     //    void OnTriggerEnter2D(Collider2D other) {
     //        if (other.gameObject.CompareTag(Tags.PLAYER)) {
     //            if (Input.GetKeyDown(KeyMapping.mainAction)) {
