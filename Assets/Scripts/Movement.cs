@@ -6,9 +6,11 @@ public class Movement : MonoBehaviour {
     [SerializeField]
     private float moveSpeed = 10f;
     private Vector2 velocity = Vector2.zero;
+    private Animator animator;
 
     void Awake() {
         mRigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     public void move(float moveX, float moveY) {
@@ -18,6 +20,13 @@ public class Movement : MonoBehaviour {
             flip();
         } else if (moveX > 0f && !faceLeft) {
             flip();
+        }
+        if (animator) {
+            if ( targetVelocity.magnitude > 0f) {
+                animator.SetBool(Params.WALKING, true);
+            } else {
+                animator.SetBool(Params.WALKING, false);
+            }
         }
     }
 

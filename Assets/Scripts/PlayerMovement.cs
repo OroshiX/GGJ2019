@@ -2,7 +2,6 @@
 
 public class PlayerMovement : MonoBehaviour {
     private Movement movement;
-
     private float horizontalMove = 0f;
 
     // Start is called before the first frame update
