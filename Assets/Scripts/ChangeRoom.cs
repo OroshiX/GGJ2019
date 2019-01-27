@@ -11,20 +11,34 @@ public class ChangeRoom : Passage {
     private GameObject character;
     private Camera mCamera;
 
+    public GameObject player;
+    public GameObject mainCamera;
+    public GameObject darkRoomCamera;
+
     public float transitionDuration = .5f;
 
     // Start is called before the first frame update
     void Start() {
         mCamera = FindObjectOfType<Camera>();
-
     }
+
+    void TeleportDarkRoom()
+    { 
+        player.transform.position = new Vector3(-358, -51, 0);
+        mainCamera.SetActive(false);
+        darkRoomCamera.SetActive(true);
+    }
+
 
     void OnCollisionEnter2D(Collision2D collisionInfo) {
         Debug.Log("Collision");
         if (collisionInfo.gameObject.CompareTag(Tags.PLAYER)) {
-            if (canGo) {
+            if (canGo)
+            {
                 changeRoom(direction);
             }
+            else
+                TeleportDarkRoom();
         }
     }
 
