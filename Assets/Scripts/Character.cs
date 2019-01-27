@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Character : MonoBehaviour {
@@ -6,6 +7,18 @@ public class Character : MonoBehaviour {
     private InteractableObject inCollision;
     private ReleaseArea releaseArea;
     private ChangeRoom whichRoom;
+    private Camera mCamera;
+    private Transform nextRoom;
+    public float heightRoom;
+
+    public float transitionDuration = 0.5f;
+
+    public bool dirTop;
+
+    void Start() {
+        mCamera = FindObjectOfType<Camera>();
+        heightRoom = whichRoom.GetComponent<SpriteRenderer>().size.y;
+    }
 
     public void release() {
         if (releaseArea) {
@@ -25,6 +38,7 @@ public class Character : MonoBehaviour {
             releaseArea = other.gameObject.GetComponent<ReleaseArea>();
         }
         if (other.gameObject.CompareTag(Tags.ROOM)) {
+            Debug.Log("We are in room!!!!!!! " + other.name);
             whichRoom = other.gameObject.GetComponent<ChangeRoom>();
         }
     }
@@ -68,6 +82,16 @@ public class Character : MonoBehaviour {
                 whichRoom.GetComponent<Opposite>();
             }
             // Check if in that
+        } else if (Input.GetAxisRaw("Vertical") > 0f) {
+            var top = whichRoom.GetComponentInChildren<Top>();
+            if (top.canWeGo()) {
+                travelFloor(top.transform, true);
+            }
+        } else if (Input.GetAxisRaw("Vertical") < 0f) {
+            var bottom = whichRoom.GetComponentInChildren<Bottom>();
+            if (bottom.canWeGo()) {
+                travelFloor(bottom.transform, false);
+            }
         }
     }
 
@@ -83,6 +107,42 @@ public class Character : MonoBehaviour {
 
     private void push(Pushable pushable) {
         // TODO
+    }
+
+    private void travelFloor(Transform floor, bool toTop) {
+        nextRoom = floor;
+        dirTop = toTop;
+        StartCoroutine("transitionCamera");
+        StartCoroutine("transitionCharacter");
+    }
+
+    IEnumerator transitionCamera() {
+        float t = 0f;
+        var startingPos = mCamera.transform.position;
+        var endPos = nextRoom.position;
+        endPos.z = -10f;
+        while (t < 1f) {
+            t += Time.deltaTime * Time.timeScale / transitionDuration;
+            mCamera.transform.position = Vector3.Lerp(startingPos, endPos, t);
+            yield return 0;
+        }
+    }
+
+    IEnumerator transitionCharacter() {
+        float t = 0f;
+        var startingPos = transform.position;
+        var endPos = new Vector2(startingPos.x, startingPos.y);
+        if (this.dirTop) {
+            endPos.y += heightRoom;
+        } else {
+            endPos.y -= heightRoom;
+        }
+        while (t < 1.0f) {
+            t += Time.deltaTime * Time.timeScale / transitionDuration;
+            transform.position = Vector3.Lerp(startingPos, endPos, t);
+            yield return 0;
+        }
+
     }
 
 }

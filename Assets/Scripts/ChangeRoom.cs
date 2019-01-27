@@ -13,13 +13,9 @@ public class ChangeRoom : Passage {
 
     public float transitionDuration = .5f;
 
-    public Transform nextRoom;
-
-    public float heightRoom;
     // Start is called before the first frame update
     void Start() {
         mCamera = FindObjectOfType<Camera>();
-        heightRoom = transform.parent.GetComponent<SpriteRenderer>().size.y;
 
     }
 
@@ -56,12 +52,6 @@ public class ChangeRoom : Passage {
                 break;
             case Direction.RIGHT:
                 endPos.x += deltaPosChangeRoom;
-                break;
-            case Direction.TOP:
-                endPos.y += heightRoom;
-                break;
-            case Direction.BOTTOM:
-                endPos.y -= heightRoom;
                 break;
         }
         while (t < 1.0f) {

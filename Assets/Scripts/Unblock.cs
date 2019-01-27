@@ -9,10 +9,13 @@ public class Unblock : MonoBehaviour {
         foreach (var passage in toUnblock) {
             passage.unblock();
         }
+        toUnblock.Clear();
     }
-    // Start is called before the first frame update
-    void Start() {
 
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag(Tags.PLAYER) && toUnblock != null && toUnblock.Count > 0) {
+            unblock();
+        }
     }
 
     // Update is called once per frame
