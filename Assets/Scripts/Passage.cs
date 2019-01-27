@@ -8,7 +8,7 @@ public class Passage : MonoBehaviour {
     protected Transform nextRoom;
 
     public bool canWeGo() {
-        return canGo;
+        return canGo || Constants.DEBUG;
     }
 
     public Transform getNextRoom() {

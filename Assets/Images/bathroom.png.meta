@@ -13,6 +13,10 @@ TextureImporter:
     21300016: bathroom_8
     21300018: bathroom_9
     21300020: bathroom_10
+    21300022: bathroom_11
+    21300024: bathroom_12
+    21300026: bathroom_13
+    21300028: bathroom_14
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -132,7 +136,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 10
-        y: 437
+        y: 765
         width: 139
         height: 196
       alignment: 0
@@ -142,7 +146,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fff11e4527a2f514589964b156acd166
+      spriteID: e66634ce8fbf0d34a80782c531808453
       vertices: []
       indices: 
       edges: []
@@ -152,7 +156,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 165
-        y: 439
+        y: 767
         width: 139
         height: 196
       alignment: 0
@@ -162,7 +166,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b939b8c1ed6db5a40955bab20eba5677
+      spriteID: 36ab5eb9c6eff6541a86468644d1f8ae
       vertices: []
       indices: 
       edges: []
@@ -172,7 +176,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 315
-        y: 353
+        y: 681
         width: 86
         height: 269
       alignment: 0
@@ -182,7 +186,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4156d9e992967a34990dc6dd8fcca15b
+      spriteID: c574221cad863b642b2421e3e2954b84
       vertices: []
       indices: 
       edges: []
@@ -192,7 +196,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 428
-        y: 451
+        y: 779
         width: 384
         height: 201
       alignment: 0
@@ -202,7 +206,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4acb0599b580e1142af1cb18ee9310ea
+      spriteID: 35b22106b26ebbc4e8945ba1862f047c
       vertices: []
       indices: 
       edges: []
@@ -212,7 +216,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 823
-        y: 457
+        y: 785
         width: 384
         height: 200
       alignment: 0
@@ -222,7 +226,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c952a000bd117d940b92bc009049a0ea
+      spriteID: cc34252c470bea84da489a4ae4aaef22
       vertices: []
       indices: 
       edges: []
@@ -232,7 +236,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 14
-        y: 392
+        y: 720
         width: 22
         height: 18
       alignment: 0
@@ -242,7 +246,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05795a4b8a9ea8b40bfa80050b1b0d1e
+      spriteID: 6188a021ec37ccb4eb6957de46da1152
       vertices: []
       indices: 
       edges: []
@@ -251,8 +255,48 @@ TextureImporter:
       name: bathroom_6
       rect:
         serializedVersion: 2
+        x: 61
+        y: 714
+        width: 55
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb4d3c6b0510fab4696bfa56081fc5c1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bathroom_7
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 716
+        width: 49
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37017dc8d22fc8f4290c9b7d9b6fc30f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bathroom_8
+      rect:
+        serializedVersion: 2
         x: 425
-        y: 339
+        y: 667
         width: 59
         height: 97
       alignment: 0
@@ -262,47 +306,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5123c8a8740890e44a44460ec339150c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bathroom_7
-      rect:
-        serializedVersion: 2
-        x: 518
-        y: 14
-        width: 164
-        height: 412
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b4afc84d457258741a0eb203faf325f1
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bathroom_8
-      rect:
-        serializedVersion: 2
-        x: 738
-        y: 14
-        width: 164
-        height: 412
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6b724d9ff35d43549834f273af0f84cd
+      spriteID: b99de6e09d27aaa49bf1b1431377d25c
       vertices: []
       indices: 
       edges: []
@@ -311,8 +315,68 @@ TextureImporter:
       name: bathroom_9
       rect:
         serializedVersion: 2
+        x: 518
+        y: 342
+        width: 164
+        height: 412
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d63dc8cdfc4521469dbe4c2f73a36f7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bathroom_10
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 342
+        width: 164
+        height: 412
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1d15783ef771a54a8158f155271a36f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bathroom_11
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 336
+        width: 447
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30bc9d7a0ef4fd34d946712f9abf7f1f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bathroom_12
+      rect:
+        serializedVersion: 2
         x: 698
-        y: 242
+        y: 570
         width: 21
         height: 64
       alignment: 0
@@ -322,17 +386,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a218a83236d7a44c85f0910bd912255
+      spriteID: fdefca702cd24704e9daa5cf5a3825c7
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bathroom_10
+      name: bathroom_13
       rect:
         serializedVersion: 2
         x: 698
-        y: 155
+        y: 483
         width: 21
         height: 63
       alignment: 0
@@ -342,7 +406,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f70f4f3c993cbfc408f7ded43f015242
+      spriteID: 89f12e055d7a12140a3537c78d699a3e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bathroom_14
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 17
+        width: 447
+        height: 295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03da818bcce66c84d90d25451240bbc5
       vertices: []
       indices: 
       edges: []
