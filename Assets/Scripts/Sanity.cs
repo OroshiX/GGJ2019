@@ -5,9 +5,14 @@ public class Sanity : MonoBehaviour {
     [SerializeField]
     [RangeAttribute(0f, 100f)]
     private float sanity = 50f;
-
     private float basicLosePerSecond = 2.5f / 60f; // 20min pour perdre depuis 50%
     private float baseMultiplier = 1f;
+    public AudioChorusFilter filter_music_hi;
+    public AudioChorusFilter filter_music_low;
+    public AudioSource asource_music_hi;
+    public AudioSource asource_music_low;
+    //    bool low_switched = false;
+    //   bool hi_switched = true;
 
 
     [SerializeField]
@@ -18,11 +23,42 @@ public class Sanity : MonoBehaviour {
         updateDisplay();
     }
 
+    void high_sanity_distorder()
+    {
+        if (filter_music_hi.dryMix > 0)
+            filter_music_hi.dryMix -= 0.002f;
+        if (filter_music_hi.rate < 0.6f)
+            filter_music_hi.rate += 0.001f;
+        if (filter_music_hi.depth < 0.35f)
+            filter_music_hi.depth += 0.0002f;
+    }
+
+    void high_atmosphere_music_distorder()
+    {
+        filter_music_hi.rate = 0.3f + ((-(sanity - 25)) * 0.012f);
+            filter_music_hi.depth = 0.03f + ((-(sanity - 25)) * 0.0132f);
+            filter_music_hi.dryMix = sanity * 0.02f;
+    }
+
+    void reset_high_sanity_music()
+    {
+        filter_music_hi.rate = 0.3f;
+        filter_music_hi.depth = 0.03f;
+        filter_music_hi.dryMix = 0.5f;
+    }
+
+
+
     // Update is called once per frame
     void Update() {
         checkDeath();
         sanity -= basicLosePerSecond * baseMultiplier * Time.deltaTime;
         updateDisplay();
+
+        if (sanity < 25)
+            high_atmosphere_music_distorder();
+        else
+            reset_high_sanity_music();
     }
 
     void checkDeath() {
