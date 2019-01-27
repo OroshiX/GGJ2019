@@ -24,7 +24,8 @@ public class Sanity : MonoBehaviour {
         updateDisplay();
     }
 
-    void high_sanity_distorder() {
+    void high_sanity_distorder()
+    {
         if (filter_music_hi.dryMix > 0)
             filter_music_hi.dryMix -= 0.002f;
         if (filter_music_hi.rate < 0.6f)
@@ -33,13 +34,15 @@ public class Sanity : MonoBehaviour {
             filter_music_hi.depth += 0.0002f;
     }
 
-    void high_atmosphere_music_distorder() {
+    void high_atmosphere_music_distorder()
+    {
         filter_music_hi.rate = 0.3f + ((-(sanity - 25)) * 0.012f);
-        filter_music_hi.depth = 0.03f + ((-(sanity - 25)) * 0.0132f);
-        filter_music_hi.dryMix = sanity * 0.02f;
+            filter_music_hi.depth = 0.03f + ((-(sanity - 25)) * 0.0132f);
+            filter_music_hi.dryMix = sanity * 0.02f;
     }
 
-    void reset_high_sanity_music() {
+    void reset_high_sanity_music()
+    {
         filter_music_hi.rate = 0.3f;
         filter_music_hi.depth = 0.03f;
         filter_music_hi.dryMix = 0.5f;
@@ -95,15 +98,15 @@ public class Sanity : MonoBehaviour {
         }
     }
 
-    public void darkCatMultiplier() {
+    public void darkCatMultiplier()
+    {
         baseMultiplier = 4f;
     }
 
     private void die() {
         //
-        var panel = FindObjectOfType<FadeOut>();
-        panel.gameObject.SetActive(true);
-        panel.startFadeOut();
+        var panel = GameObject.FindWithTag(Tags.PANEL);
+        panel.GetComponent<FadeOut>().startFadeOut();
         Invoke("mainMenu", 3f);
 
 
@@ -111,10 +114,6 @@ public class Sanity : MonoBehaviour {
 
     private void mainMenu() {
         SceneManager.LoadScene("MainMenu");
-    }
-
-    public float get_Sanity() {
-        return (this.sanity);
     }
 
 }

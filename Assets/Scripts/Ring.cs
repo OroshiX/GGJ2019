@@ -7,8 +7,8 @@ public class Ring : MonoBehaviour {
     private GameObject ringDisplay;
     // Start is called before the first frame update
     void Start() {
+        FindObjectOfType<PlaySound>().playPhone();
         InvokeRepeating(nameof(ring), 2f, 1f);
-
     }
 
     private void ring() {

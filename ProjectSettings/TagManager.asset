@@ -9,6 +9,7 @@ TagManager:
   - Object
   - AreaRelease
   - Room
+  - Panel
   layers:
   - Default
   - TransparentFX

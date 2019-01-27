@@ -1,7 +1,17 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour {
+
+    public AudioSource source_light;
+    public AudioSource source_dark;
+    public AudioSource source_buzz;
+    public AudioChorusFilter filter_buzz;
+    public GameObject obj_transition1;
+    public GameObject obj_transition2;
+    public float sanity;
+
     [SerializeField]
     private Takeable inHand;
     private InteractableObject inCollision;
@@ -10,6 +20,10 @@ public class Character : MonoBehaviour {
     private GameObject whichRoom;
     private Camera mCamera;
     private Transform nextRoom;
+    private bool soundside = true;
+
+    [SerializeField]
+    private GameObject panelFade;
 
     public float transitionDuration = 0.5f;
 
@@ -59,8 +73,44 @@ public class Character : MonoBehaviour {
             releaseArea = null;
         }
     }
+    /*
+        private Color currentColor;
+        private float fadeInDuration = 1f;
+        private Image fadeImage;
+        private bool hasBegun = false;
+    //*/
+    private void endGame() {
+        //        fadeImage = GetComponent<Image>();
+        //        currentColor = fadeImage.color;
+        //        panelFade.SetActive(true);
+        SceneManager.LoadScene("MainMenu");
+    }
+
+
+    void calc_buzz_kill() {
+        if (!soundside)
+        {
+            if (!filter_buzz.gameObject.activeSelf)
+                filter_buzz.gameObject.SetActive(true);
+
+        }
+        else
+        if (filter_buzz.gameObject.activeSelf)
+            filter_buzz.gameObject.SetActive(false);
+
+        if (sanity > 25)
+            source_buzz.pitch = 1.0f;
+        else
+        {
+            source_buzz.pitch = 1.0f + (25 - sanity) / 50.0f;
+        }
+    }
 
     void Update() {
+
+
+        sanity = gameObject.GetComponent<Sanity>().get_Sanity();
+        calc_buzz_kill();
         if (Input.GetKeyDown(KeyMapping.mainAction)) {
             if (inHand) {
                 release();
@@ -118,9 +168,11 @@ public class Character : MonoBehaviour {
     private void display(Displayable displayable) {
         displayed = Instantiate(displayable.getToDisplay());
 
-        Invoke(nameof(destroyDisplay), 5f);
         // TODO play sound
-        //        FindObjectOfType<SoundManager>().playPhoneCall();
+        FindObjectOfType<PlaySound>().playPhoneCall();
+        Invoke(nameof(destroyDisplay), 5f);
+
+        Invoke(nameof(endGame), 10f);
     }
 
     private void destroyDisplay() {
@@ -149,9 +201,31 @@ public class Character : MonoBehaviour {
         StartCoroutine("transitionCamera");
     }
 
+    private void swap_sounds()
+    {
+        soundside = !soundside;
+        if (soundside == false)
+        {
+            source_light.volume = 0;
+            source_dark.volume = 100;
+            if (obj_transition1.activeSelf)
+                obj_transition1.SetActive(false);
+            obj_transition2.SetActive(true);
+        }
+        else
+        {
+            source_light.volume = 100;
+            source_dark.volume = 0;
+            if (obj_transition2.activeSelf)
+                obj_transition2.SetActive(false);
+            obj_transition1.SetActive(true);
+        }
+    }
+
     private void travelOpposite(Transform targetTransform) {
         nextRoom = targetTransform;
         playSoundOpposite();
+        swap_sounds();
 
         var rotation = transform.rotation;
         rotation.x = -rotation.x;

@@ -18,10 +18,6 @@ public class leechlife : MonoBehaviour
     //au contact, baisse fixe + ralentissement
     void Update()
     {
-        if (room.Equals(character.getWhichRoom()))
-        {
-            sanity.darkCatMultiplier();
-        }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
