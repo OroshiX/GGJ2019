@@ -171,6 +171,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inHand: {fileID: 0}
+  whichRoom: {fileID: 6795746019442711348, guid: b0da85186680a024784522f8593bc934,
+    type: 3}
+  heightRoom: 0
+  transitionDuration: 0.5
+  dirTop: 0
 --- !u!1 &6709671426612849011
 GameObject:
   m_ObjectHideFlags: 0

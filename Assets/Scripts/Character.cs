@@ -6,18 +6,17 @@ public class Character : MonoBehaviour {
     private Takeable inHand;
     private InteractableObject inCollision;
     private ReleaseArea releaseArea;
-    private ChangeRoom whichRoom;
+    [SerializeField]
+    private GameObject whichRoom;
     private Camera mCamera;
     private Transform nextRoom;
-    public float heightRoom;
 
     public float transitionDuration = 0.5f;
 
-    public bool dirTop;
+    public float deltaY;
 
     void Start() {
         mCamera = FindObjectOfType<Camera>();
-        heightRoom = whichRoom.GetComponent<SpriteRenderer>().size.y;
     }
 
     public void release() {
@@ -39,7 +38,7 @@ public class Character : MonoBehaviour {
         }
         if (other.gameObject.CompareTag(Tags.ROOM)) {
             Debug.Log("We are in room!!!!!!! " + other.name);
-            whichRoom = other.gameObject.GetComponent<ChangeRoom>();
+            whichRoom = other.gameObject;
         }
     }
 
@@ -79,18 +78,21 @@ public class Character : MonoBehaviour {
             // TODO check can change world
             // Check which room we are in
             if (whichRoom) {
-                whichRoom.GetComponent<Opposite>();
+                whichRoom.GetComponentInChildren<Opposite>();
             }
             // Check if in that
         } else if (Input.GetAxisRaw("Vertical") > 0f) {
             var top = whichRoom.GetComponentInChildren<Top>();
+            Debug.Log("AAAAAAAAAA >0, top: " + top + " can we go: ");
             if (top.canWeGo()) {
-                travelFloor(top.transform, true);
+                Debug.Log("We can go!");
+                travelFloor(top.getNextRoom().transform);
             }
         } else if (Input.GetAxisRaw("Vertical") < 0f) {
+            Debug.Log("AAAAAAAAAA <0");
             var bottom = whichRoom.GetComponentInChildren<Bottom>();
             if (bottom.canWeGo()) {
-                travelFloor(bottom.transform, false);
+                travelFloor(bottom.getNextRoom().transform);
             }
         }
     }
@@ -109,9 +111,10 @@ public class Character : MonoBehaviour {
         // TODO
     }
 
-    private void travelFloor(Transform floor, bool toTop) {
+    private void travelFloor(Transform floor) {
+        Debug.Log("Traveling!");
         nextRoom = floor;
-        dirTop = toTop;
+        deltaY = floor.position.y - whichRoom.transform.position.y;
         StartCoroutine("transitionCamera");
         StartCoroutine("transitionCharacter");
     }
@@ -132,11 +135,8 @@ public class Character : MonoBehaviour {
         float t = 0f;
         var startingPos = transform.position;
         var endPos = new Vector2(startingPos.x, startingPos.y);
-        if (this.dirTop) {
-            endPos.y += heightRoom;
-        } else {
-            endPos.y -= heightRoom;
-        }
+        endPos.y += deltaY;
+        
         while (t < 1.0f) {
             t += Time.deltaTime * Time.timeScale / transitionDuration;
             transform.position = Vector3.Lerp(startingPos, endPos, t);
