@@ -15,8 +15,11 @@ public class Character : MonoBehaviour {
 
     public float deltaY;
 
+    public Animator animator;
+
     void Start() {
         mCamera = FindObjectOfType<Camera>();
+        animator = GetComponent<Animator>();
     }
 
     public void release() {
@@ -111,16 +114,26 @@ public class Character : MonoBehaviour {
         deltaY = nextRoom.position.y - mCamera.transform.position.y;
         //floor.position.y - whichRoom.transform.position.y;
         playSoundUpDown();
+        var startingPosCharacter = transform.position;
+        var endPosCharacter = new Vector3(startingPosCharacter.x, startingPosCharacter.y + deltaY, 0f);
+        StartCoroutine(transitionCharacter(startingPosCharacter, endPosCharacter));
+
         StartCoroutine("transitionCamera");
-        StartCoroutine("transitionCharacter");
     }
 
-    private void travelOpposite(Transform transform) {
-        nextRoom = transform;
-        deltaY = nextRoom.position.y - mCamera.transform.position.y;
+    private void travelOpposite(Transform targetTransform) {
+        nextRoom = targetTransform;
         playSoundOpposite();
+
+        var rotation = transform.rotation;
+        rotation.x = -rotation.x;
+        transform.rotation = rotation;
+        var startingPosCharacter = transform.position;
+        var endPosCharacter = new Vector2(startingPosCharacter.x, -startingPosCharacter.y);
+
         StartCoroutine("transitionCamera");
-        StartCoroutine("transitionCharacter");
+        StartCoroutine(transitionCharacter(startingPosCharacter, endPosCharacter));
+        animator.SetTrigger(Params.SWITCH);
     }
 
     IEnumerator transitionCamera() {
@@ -135,10 +148,8 @@ public class Character : MonoBehaviour {
         }
     }
 
-    IEnumerator transitionCharacter() {
+    IEnumerator transitionCharacter(Vector3 startingPos, Vector3 endPos) {
         float t = 0f;
-        var startingPos = transform.position;
-        var endPos = new Vector2(startingPos.x, startingPos.y + deltaY);
 
         while (t < 1.0f) {
             t += Time.deltaTime * Time.timeScale / transitionDuration;
