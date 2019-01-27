@@ -7,6 +7,11 @@ public class ReleaseArea : MonoBehaviour {
     private TypeObject typeObjectToGoHere;
     [SerializeField]
     private Transform positionReleasedObject;
+    private ReleaseAction releaseAction;
+
+    private void Awake() {
+        releaseAction = GetComponent<ReleaseAction>();
+    }
 
     [SerializeField]
     private Sprite renderedArea;
@@ -17,6 +22,9 @@ public class ReleaseArea : MonoBehaviour {
             takeable.transform.parent = transform;
             takeable.GetComponent<SpriteRenderer>().sprite = renderedArea;
             this.takeable = takeable;
+            if (releaseAction) {
+                releaseAction.doOnRelease();
+            }
             takeable.transform.localPosition = positionReleasedObject.localPosition;
         }
 

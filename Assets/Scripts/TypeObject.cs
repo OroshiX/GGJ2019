@@ -1,4 +1,5 @@
 public enum TypeObject {
     TABLEAU,
-    DRESS
+    DRESS,
+    PHONE
 }

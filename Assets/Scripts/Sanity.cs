@@ -97,6 +97,11 @@ public class Sanity : MonoBehaviour {
         }
     }
 
+    public void darkCatMultiplier()
+    {
+        baseMultiplier = 4f;
+    }
+
     private void die() {
         //
 

@@ -4,11 +4,6 @@ public class AIMovement : MonoBehaviour {
 
     private Movement movement;
 
-    [SerializeField]
-    private Vector2 leftBottom, rightTop;
-
-    private Vector2 forwardDirection;
-
     void Start() {
         movement = GetComponent<Movement>();
         InvokeRepeating("AIMoving", 0f, 3.0f);

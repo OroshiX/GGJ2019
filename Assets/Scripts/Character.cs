@@ -17,6 +17,8 @@ public class Character : MonoBehaviour {
 
     public Animator animator;
 
+    public GameObject displayed;
+
     void Start() {
         mCamera = FindObjectOfType<Camera>();
         animator = GetComponent<Animator>();
@@ -25,10 +27,17 @@ public class Character : MonoBehaviour {
     public void release() {
         if (releaseArea) {
             releaseArea.put(inHand);
+            inHand = null;
         } else {
             Debug.LogError("Can't release here");
             // TODO Can't release here : play sound?
         }
+    }
+
+    public void undisplay() {
+        //        displayed.SetActive(false); // TODO destroy?
+        Destroy(displayed);
+        displayed = null;
     }
 
     void OnTriggerEnter2D(Collider2D other) {
@@ -55,11 +64,15 @@ public class Character : MonoBehaviour {
         if (Input.GetKeyDown(KeyMapping.mainAction)) {
             if (inHand) {
                 release();
+            } else if (displayed) {
+                undisplay();
             } else if (inCollision) {
                 if ((bool) inCollision.GetComponent<Takeable>()) {
                     take(inCollision.GetComponent<Takeable>());
                 } else if (inCollision.GetComponent<Openable>()) {
                     openOrClose(inCollision.GetComponent<Openable>());
+                } else if (inCollision.GetComponent<Displayable>()) {
+                    display(inCollision.GetComponent<Displayable>());
                 }
             }
         } else if (Input.GetKeyDown(KeyMapping.secondaryAction)) {
@@ -97,7 +110,22 @@ public class Character : MonoBehaviour {
     private void take(Takeable theObject) {
         inHand = theObject;
         inHand.transform.parent = gameObject.transform;
-        inHand.transform.localPosition = new Vector2();
+        inHand.transform.localPosition = new Vector2(0.69f, 0f);
+        var type = whichRoom.GetComponent<TypeRoom>().getTypeRoom();
+        inHand.GetComponent<SpriteRenderer>().sprite = type == Lightness.LIGHT ? inHand.getCarriedLight() : inHand.getCarriedDark();
+    }
+
+    private void display(Displayable displayable) {
+        displayed = Instantiate(displayable.getToDisplay());
+
+        Invoke(nameof(destroyDisplay), 5f);
+        // TODO play sound
+        //        FindObjectOfType<SoundManager>().playPhoneCall();
+    }
+
+    private void destroyDisplay() {
+        Destroy(displayed);
+        Destroy(displayed.gameObject);
     }
 
     private void openOrClose(Openable openable) {
@@ -159,8 +187,13 @@ public class Character : MonoBehaviour {
 
     }
 
+    public GameObject getWhichRoom() {
+        return whichRoom;
+    }
+
     private void playSoundUpDown() {
         // TODO sound
+
     }
 
     private void playSoundOpposite() {

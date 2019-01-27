@@ -76,6 +76,9 @@ MonoBehaviour:
   deltaPosChangeRoom: 5
   character: {fileID: 6709671426234468430, guid: d02f894011ba9954990584f81bec1b2c,
     type: 3}
+  player: {fileID: 0}
+  mainCamera: {fileID: 0}
+  darkRoomCamera: {fileID: 0}
   transitionDuration: 0.8
 --- !u!1 &427670016841065724
 GameObject:
@@ -153,6 +156,9 @@ MonoBehaviour:
   deltaPosChangeRoom: 5
   character: {fileID: 6709671426234468430, guid: d02f894011ba9954990584f81bec1b2c,
     type: 3}
+  player: {fileID: 0}
+  mainCamera: {fileID: 0}
+  darkRoomCamera: {fileID: 0}
   transitionDuration: 0.8
 --- !u!1 &915349880983734943
 GameObject:
@@ -300,6 +306,7 @@ GameObject:
   - component: {fileID: 6795746019442711350}
   - component: {fileID: 6795746019442711351}
   - component: {fileID: 2423403109250922460}
+  - component: {fileID: 5152654386930249894}
   m_Layer: 0
   m_Name: Light livingRoom
   m_TagString: Room
@@ -400,3 +407,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 19.11, y: 10.76}
   m_EdgeRadius: 0
+--- !u!114 &5152654386930249894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6795746019442711348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7ecb43c3549e6438317e58f7646a42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
