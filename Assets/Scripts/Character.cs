@@ -75,10 +75,13 @@ public class Character : MonoBehaviour {
                 }
             }
         } else if (Input.GetKeyDown(KeyMapping.changeWorld)) {
-            // TODO check can change world
             // Check which room we are in
             if (whichRoom) {
-                whichRoom.GetComponentInChildren<Opposite>();
+                var opposite = whichRoom.GetComponentInChildren<Opposite>();
+                // check if we can change world
+                if (opposite.canWeGo()) {
+                    travelOpposite(opposite.getNextRoom().transform);
+                }
             }
             // Check if in that
         } else if (Input.GetAxisRaw("Vertical") > 0f) {
@@ -114,7 +117,17 @@ public class Character : MonoBehaviour {
     private void travelFloor(Transform floor) {
         Debug.Log("Traveling!");
         nextRoom = floor;
-        deltaY = floor.position.y - whichRoom.transform.position.y;
+        deltaY = nextRoom.position.y - mCamera.transform.position.y;
+        //floor.position.y - whichRoom.transform.position.y;
+        playSoundUpDown();
+        StartCoroutine("transitionCamera");
+        StartCoroutine("transitionCharacter");
+    }
+
+    private void travelOpposite(Transform transform) {
+        nextRoom = transform;
+        deltaY = nextRoom.position.y - mCamera.transform.position.y;
+        playSoundOpposite();
         StartCoroutine("transitionCamera");
         StartCoroutine("transitionCharacter");
     }
@@ -134,9 +147,8 @@ public class Character : MonoBehaviour {
     IEnumerator transitionCharacter() {
         float t = 0f;
         var startingPos = transform.position;
-        var endPos = new Vector2(startingPos.x, startingPos.y);
-        endPos.y += deltaY;
-        
+        var endPos = new Vector2(startingPos.x, startingPos.y + deltaY);
+
         while (t < 1.0f) {
             t += Time.deltaTime * Time.timeScale / transitionDuration;
             transform.position = Vector3.Lerp(startingPos, endPos, t);
@@ -144,5 +156,14 @@ public class Character : MonoBehaviour {
         }
 
     }
+
+    private void playSoundUpDown() {
+        // TODO sound
+    }
+
+    private void playSoundOpposite() {
+        // TODO sound
+    }
+
 
 }
