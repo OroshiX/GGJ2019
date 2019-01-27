@@ -32,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6709671426234468430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40, y: -3.25, z: 0}
+  m_LocalPosition: {x: 70, y: -3.25, z: 0}
   m_LocalScale: {x: 4.3085, y: 4.3085, z: 4.3085}
   m_Children:
   - {fileID: 6709671426612849004}
@@ -131,6 +131,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sanity: 50
+  filter_music_hi: {fileID: 0}
+  filter_music_low: {fileID: 0}
+  asource_music_hi: {fileID: 0}
+  asource_music_low: {fileID: 0}
   slider: {fileID: 0}
 --- !u!61 &6709671426234468421
 BoxCollider2D:
@@ -173,9 +177,8 @@ MonoBehaviour:
   inHand: {fileID: 0}
   whichRoom: {fileID: 6795746019442711348, guid: b0da85186680a024784522f8593bc934,
     type: 3}
-  heightRoom: 0
   transitionDuration: 0.5
-  dirTop: 0
+  deltaY: 0
 --- !u!1 &6709671426612849011
 GameObject:
   m_ObjectHideFlags: 0

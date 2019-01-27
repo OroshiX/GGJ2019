@@ -29,7 +29,6 @@ public class Character : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("We are colliding with " + other.name);
         if (other.gameObject.CompareTag(Tags.OBJECT)) {
             inCollision = other.gameObject.GetComponent<InteractableObject>();
         }
@@ -37,13 +36,11 @@ public class Character : MonoBehaviour {
             releaseArea = other.gameObject.GetComponent<ReleaseArea>();
         }
         if (other.gameObject.CompareTag(Tags.ROOM)) {
-            Debug.Log("We are in room!!!!!!! " + other.name);
             whichRoom = other.gameObject;
         }
     }
 
     void OnTriggerExit2D(Collider2D other) {
-        Debug.Log("We are EXITING collision with " + other.name);
         if (other.gameObject.CompareTag(Tags.OBJECT)) {
             inCollision = null;
         } else if (other.gameObject.CompareTag(Tags.AREA_RELEASE)) {
@@ -53,12 +50,9 @@ public class Character : MonoBehaviour {
 
     void Update() {
         if (Input.GetKeyDown(KeyMapping.mainAction)) {
-            Debug.Log("Pressed main action!");
             if (inHand) {
-                Debug.Log("In hand, so release");
                 release();
             } else if (inCollision) {
-                Debug.Log("In collision");
                 if ((bool) inCollision.GetComponent<Takeable>()) {
                     take(inCollision.GetComponent<Takeable>());
                 } else if (inCollision.GetComponent<Openable>()) {
@@ -86,13 +80,10 @@ public class Character : MonoBehaviour {
             // Check if in that
         } else if (Input.GetAxisRaw("Vertical") > 0f) {
             var top = whichRoom.GetComponentInChildren<Top>();
-            Debug.Log("AAAAAAAAAA >0, top: " + top + " can we go: ");
             if (top.canWeGo()) {
-                Debug.Log("We can go!");
                 travelFloor(top.getNextRoom().transform);
             }
         } else if (Input.GetAxisRaw("Vertical") < 0f) {
-            Debug.Log("AAAAAAAAAA <0");
             var bottom = whichRoom.GetComponentInChildren<Bottom>();
             if (bottom.canWeGo()) {
                 travelFloor(bottom.getNextRoom().transform);
