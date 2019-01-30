@@ -1,14 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlaySound : MonoBehaviour {
     [SerializeField]
     private AudioSource audioSourceTelephone, audioSourcePhoneCall, musicFin;
-
-    void Start() {
-        //        playPhoneCall();
-    }
 
     public void lastMusic() {
         musicFin.gameObject.SetActive(true);

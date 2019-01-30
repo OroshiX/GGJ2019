@@ -170,9 +170,10 @@ public class Character : MonoBehaviour {
 
         // TODO play sound
         FindObjectOfType<PlaySound>().playPhoneCall();
-        Invoke(nameof(destroyDisplay), 5f);
+        FindObjectOfType<PlaySound>().lastMusic();
+        Invoke(nameof(destroyDisplay), Constants.TIME_PHONE_CALL);
 
-        Invoke(nameof(endGame), 10f);
+        Invoke(nameof(endGame), Constants.TIME_PHONE_CALL);
     }
 
     private void destroyDisplay() {
@@ -201,8 +202,7 @@ public class Character : MonoBehaviour {
         StartCoroutine("transitionCamera");
     }
 
-    private void swap_sounds()
-    {
+    private void swap_sounds() {
         soundside = !soundside;
         if (soundside == false)
         {
